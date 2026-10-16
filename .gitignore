@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# This project's local files and build outputs
+.venv/
+build*/
+dist*/
+*.sav
+*.exe
+
+# Keep the PyInstaller build recipe
+!SinSpireSaveEditor.spec
