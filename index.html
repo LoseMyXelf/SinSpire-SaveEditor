@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171519">
+  <meta name="description" content="An unofficial Windows save editor for Sin Spire. Review and edit supported save values, create backups, and save changes as a separate copy.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sin Spire Save Editor for Windows">
+  <meta property="og:description" content="Review supported Sin Spire save values, create backups, and save edits as a separate copy with this unofficial Windows community tool.">
+  <meta property="og:url" content="https://losemyxelf.github.io/SinSpire-SaveEditor/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/LoseMyXelf/SinSpire-SaveEditor/main/site-icon.webp">
+  <link rel="icon" type="image/webp" href="site-icon.webp">
+  <link rel="canonical" href="https://losemyxelf.github.io/SinSpire-SaveEditor/">
+  <title>Sin Spire Save Editor for Windows | LoseMyXelf</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #171519;
+      --panel: #211e23;
+      --panel-raised: #302b32;
+      --line: #41383f;
+      --text: #f2eee9;
+      --muted: #c0b8b5;
+      --accent: #8b4149;
+      --accent-hover: #a35058;
+      --gold: #d6bd8e;
+      --sage: #a9b49b;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(ellipse at 78% 0%, rgba(116, 52, 59, .18), transparent 34rem),
+        var(--page);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    header { padding: 22px 0; border-bottom: 1px solid rgba(192, 184, 181, .12); }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; letter-spacing: .01em; }
+    .brand img { width: 40px; height: 40px; border-radius: 10px; }
+    .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: .94rem; }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover, .text-link:hover { color: var(--gold); }
+    main { padding: 62px 0 72px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(230px, .65fr); align-items: center; gap: 44px; }
+    .eyebrow { margin: 0 0 12px; color: var(--sage); font-size: .78rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 700px; margin: 0; font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: 1.03; letter-spacing: -.045em; }
+    .lead { max-width: 650px; margin: 20px 0 26px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; padding: 0 20px; border: 1px solid transparent; border-radius: 12px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; transition: background .15s ease, transform .15s ease; }
+    .button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .button.secondary { border-color: var(--line); background: var(--panel-raised); color: var(--text); }
+    .button.secondary:hover { background: #3a343d; }
+    .hero-art { display: grid; place-items: center; min-height: 300px; border: 1px solid var(--line); border-radius: 28px; background: linear-gradient(145deg, rgba(48,43,50,.92), rgba(33,30,35,.86)); box-shadow: 0 24px 70px rgba(0,0,0,.24); }
+    .hero-art img { display: block; width: min(72%, 250px); height: auto; border-radius: 28px; box-shadow: 0 18px 55px rgba(0,0,0,.35); }
+    .notice { margin: 38px 0 0; padding: 15px 18px; border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 12px; background: rgba(33,30,35,.72); color: var(--muted); font-size: .94rem; }
+    .notice strong { color: var(--text); }
+    .section { padding-top: 68px; }
+    .section h2 { margin: 0 0 8px; font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -.025em; }
+    .section-intro { margin: 0 0 24px; color: var(--muted); }
+    .features { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .feature { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    .feature h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--muted); }
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; counter-reset: step; }
+    .step { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    .step::before { counter-increment: step; content: "0" counter(step); display: block; margin-bottom: 12px; color: var(--sage); font-size: .78rem; font-weight: 800; letter-spacing: .1em; }
+    .step h3 { margin: 0 0 6px; font-size: 1rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .credits { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    .credits p { margin: 0; color: var(--muted); }
+    .credit-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    .text-link { color: var(--gold); text-underline-offset: 3px; }
+    footer { padding: 22px 0 34px; border-top: 1px solid rgba(192, 184, 181, .12); color: var(--muted); font-size: .88rem; }
+    footer p { margin: 6px 0; }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 28px, 620px); }
+      .nav { align-items: flex-start; }
+      .nav-links { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+      main { padding-top: 42px; }
+      .hero { grid-template-columns: 1fr; gap: 28px; }
+      .hero-art { min-height: 225px; }
+      .hero-art img { width: 170px; border-radius: 22px; }
+      .features, .steps { grid-template-columns: 1fr; }
+      .section { padding-top: 48px; }
+    }
+    @media (max-width: 470px) {
+      .nav { flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+      .actions { display: grid; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Sin Spire Save Editor home">
+        <img src="site-icon.webp" alt="Original save editor tower icon">
+        <span>Sin Spire Save Editor</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#credits">Credits</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Unofficial community tool · Windows · v0.2.0</p>
+        <h1 id="page-title">A safer way to edit your Sin Spire save.</h1>
+        <p class="lead">Review supported save values, make focused changes, and write them to a separate copy. Your imported save stays untouched.</p>
+        <div class="actions">
+          <a class="button" href="https://github.com/LoseMyXelf/SinSpire-SaveEditor/releases">View downloads</a>
+          <a class="button secondary" href="https://github.com/LoseMyXelf/SinSpire-SaveEditor">View project on GitHub</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Original save editor app artwork">
+        <img src="site-icon.webp" alt="Original gothic tower and save-file emblem created for the save editor">
+      </div>
+    </section>
+
+    <p class="notice"><strong>Protect your progress:</strong> Back up your save before editing. Only supported values can be changed, and the game may reject modified saves. This is an independent community project, not an official tool or an endorsement by Krasue Games.</p>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <h2 id="features-title">Made for quick edits, with more detail when you need it</h2>
+      <p class="section-intro">Start with the commonly used fields, or switch to Expert mode to inspect additional saved data.</p>
+      <div class="features">
+        <article class="feature"><h3>Simple and Expert modes</h3><p>Simple mode keeps the main editing sections easy to scan. Expert mode reveals additional data and storage details.</p></article>
+        <article class="feature"><h3>Player and progression values</h3><p>Edit supported player values, skill levels, inventory counts, and progress statistics.</p></article>
+        <article class="feature"><h3>Weapon adjustments</h3><p>Change weapon durability or loaded ammunition. Repair all sets durability to 100 and leaves ammo unchanged.</p></article>
+        <article class="feature"><h3>Backups and separate copies</h3><p>Create a byte-for-byte backup, then save your edits as a separate file so the imported original remains untouched.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <p class="section-intro">The editor is designed to keep the original save file safe while you review your changes.</p>
+      <div class="steps">
+        <article class="step"><h3>Open a save</h3><p>Choose a `.sav` file or drag it into the editor. Close the game before editing.</p></article>
+        <article class="step"><h3>Review and edit</h3><p>Use the sections that match what you want to change. Double-click supported values to edit them.</p></article>
+        <article class="step"><h3>Save a copy</h3><p>Choose a destination for the edited copy, then select that copy in the game.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="credits" aria-labelledby="credits-title">
+      <h2 id="credits-title">Credits and links</h2>
+      <div class="credits">
+        <p><em>Sin Spire</em> is by Krasue Games. This independent save editor is by LoseMyXelf (LMX). Game marks and assets belong to their respective rights holders.</p>
+        <div class="credit-links">
+          <a class="text-link" href="https://store.steampowered.com/app/3221770/Sin_Spire/">Sin Spire on Steam</a>
+          <a class="text-link" href="https://www.patreon.com/c/KrasueGames47/home">Krasue Games on Patreon</a>
+          <a class="text-link" href="https://github.com/LoseMyXelf/SinSpire-SaveEditor">Source and project details</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Sin Spire Save Editor · Created by LoseMyXelf (LMX).</p>
+      <p>Unofficial community project. Not affiliated with, sponsored by, or endorsed by Krasue Games.</p>
+    </div>
+  </footer>
+</body>
+</html>
