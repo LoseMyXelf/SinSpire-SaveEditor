@@ -46,6 +46,7 @@ STATS_ORDER = ("Consumables Collected", "Containers Opened", "Equipment Found", 
 REFERENCE_ORDER = ("MapName", "SavedDiff", "CurrentPerks", "ReadNotes", "Date")
 APP_VERSION = "0.2.0"
 DEVELOPER_PATREON_URL = "https://www.patreon.com/c/KrasueGames47/home"
+SIN_SPIRE_STEAM_URL = "https://store.steampowered.com/app/3221770/Sin_Spire/"
 COLORS = {
     "window": "#141316",
     "panel": "#211e23",
@@ -129,12 +130,12 @@ class SaveEditor(ctk.CTk, TkinterDnD.DnDWrapper):
         super().__init__()
         self.TkdndVersion = TkinterDnD._require(self)
         self.title("Sin Spire Save Editor")
-        icon_path = Path(__file__).resolve().with_name("sinspire_icon.ico")
+        icon_path = Path(__file__).resolve().with_name("save_editor_app_icon.ico")
         try:
             self.iconbitmap(default=str(icon_path))
             self.iconbitmap(str(icon_path))
         except tk.TclError:
-            png_icon = Path(__file__).resolve().with_name("sinspire_icon_small.png")
+            png_icon = Path(__file__).resolve().with_name("save_editor_app_icon.png")
             if png_icon.exists():
                 self._app_icon = tk.PhotoImage(file=str(png_icon))
                 self.iconphoto(True, self._app_icon)
@@ -209,11 +210,13 @@ class SaveEditor(ctk.CTk, TkinterDnD.DnDWrapper):
         root.grid_rowconfigure(2, weight=1)
         top = styled_frame(root)
         top.grid(row=0, column=0, sticky="ew", pady=(0, 16))
-        logo_path = Path(__file__).resolve().with_name("sinspire_logo_header.png")
-        if logo_path.exists():
-            logo = Image.open(logo_path)
-            self._header_logo = ctk.CTkImage(light_image=logo, dark_image=logo, size=logo.size)
-            ctk.CTkLabel(top, image=self._header_logo, text="", fg_color="transparent").pack(side="left", padx=(0, 18))
+        header_icon_path = Path(__file__).resolve().with_name("save_editor_app_icon.png")
+        if header_icon_path.exists():
+            header_icon = Image.open(header_icon_path)
+            self._header_icon = ctk.CTkImage(light_image=header_icon, dark_image=header_icon, size=(64, 64))
+            icon_badge = ctk.CTkFrame(top, fg_color=COLORS["panel_raised"], corner_radius=14, border_width=1, border_color=COLORS["line"])
+            icon_badge.pack(side="left", padx=(0, 16), pady=4)
+            ctk.CTkLabel(icon_badge, image=self._header_icon, text="", fg_color="transparent").pack(padx=5, pady=5)
         title_block = styled_frame(top)
         title_block.pack(side="left", fill="x", expand=True)
         styled_label(title_block, f"SAVE WORKSHOP  /  SIN SPIRE   ·   v{APP_VERSION}", "Kicker.TLabel").pack(anchor="w", pady=(0, 5))
@@ -399,9 +402,21 @@ class SaveEditor(ctk.CTk, TkinterDnD.DnDWrapper):
         styled_label(developer_credit, "Sin Spire by Krasue Games", "Subtitle.TLabel").pack(side="left", anchor="w", expand=True)
         ctk.CTkButton(
             developer_credit,
+            text="Sin Spire on Steam",
+            command=lambda: webbrowser.open(SIN_SPIRE_STEAM_URL),
+            width=190,
+            height=44,
+            corner_radius=12,
+            fg_color=COLORS["accent"],
+            hover_color=COLORS["accent_hover"],
+            text_color=COLORS["text"],
+            font=("Segoe UI", 12, "bold"),
+        ).pack(side="right", padx=(8, 0))
+        ctk.CTkButton(
+            developer_credit,
             text="Krasue Games on Patreon",
             command=lambda: webbrowser.open(DEVELOPER_PATREON_URL),
-            width=225,
+            width=210,
             height=44,
             corner_radius=12,
             fg_color=COLORS["accent"],

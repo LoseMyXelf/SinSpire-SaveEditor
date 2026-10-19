@@ -1,79 +1,58 @@
 # Sin Spire Save Editor
 
-An unofficial Windows desktop utility for inspecting and editing supported **Sin Spire** Unreal Engine `.sav` files. It is written in Python and uses a bundled GVAS parser.
+An unofficial Windows desktop tool by **LoseMyXelf (LMX)** for viewing and editing supported *Sin Spire* save files. Open a `.sav` file, adjust commonly used player and progression values, and save your changes as a separate copy.
 
-Current version: **0.2.0**.
 
-> **Unofficial community project:** This tool is not made by, affiliated with, or endorsed by Krasue Games. Use it at your own risk. Keep a backup of your save before editing.
+**Current version:** 0.2.0
+
+> This is an independent community project. It is not made by, affiliated with, sponsored by, or endorsed by Krasue Games. Back up your save before editing; unsupported changes may make a save unusable.
 
 ## Features
 
-- Open and inspect a `.sav` file.
-- Edit player values, skill levels, inventory and progress values, and supported weapon fields.
-- Repair all weapons by setting durability to 100 without changing loaded ammunition.
-- Create a timestamped, byte-for-byte backup of the original save.
-- Save an edited copy to a folder you choose. The source save is left untouched, and the copy keeps the original filename.
-- Browse help about save storage types and project information in the app.
+- **Simple mode** focuses on commonly used player values, skills, inventory and progress, and weapons.
+- **Expert mode** reveals additional save data and technical details.
+- Drag and drop a `.sav` file into the app, or click the drop area to choose one.
+- Edit supported player values, skill levels, inventory and progress data, weapon durability, and loaded ammunition.
+- Repair all weapon durability values to 100 without changing loaded ammunition.
+- Create a timestamped, byte-for-byte backup of the source save.
+- Save edits as a separate copy; the imported source file remains untouched.
 
-The app can only edit files its bundled parser can read. It cannot reconstruct data from a save whose structure is too damaged to parse.
+The editor can only handle save structures supported by its bundled parser. It cannot restore data from a save that is too damaged to parse, and modified saves are not guaranteed to work in game.
 
-## Run from source
+## Download and run
 
-### Requirements
+Download the Windows executable from the project's [GitHub Releases](../../releases) page. The app does not require a Python installation.
 
-- Windows 10 or later
-- Python 3.10 or later, with Tkinter
+To run from source, use Windows 10 or later with Python 3.10+ and Tkinter:
 
-### Start the app
+```powershell
+py -3 -m pip install -r requirements.txt
+py -3 .\save_editor_gui.py
+```
 
-1. Download or clone this repository.
-2. Open PowerShell in the project folder.
-3. Install the Python dependency:
-
-   ```powershell
-   py -3 -m pip install -r requirements.txt
-   ```
-
-4. Start the app:
-
-   ```powershell
-   py -3 .\save_editor_gui.py
-   ```
-
-   You can also double-click `launch_editor.bat`.
-
-5. Choose **Open / Import .sav**, make your edits, then select **Save edited copy**. Choose the destination folder. The app writes a separate file with the original filename and opens the destination folder when finished. Select that copy in the game to load it.
-
-Close the game before editing a save. Keep your own backup in case the game rejects an edited file.
+You can also launch it by double-clicking `launch_editor.bat`.
 
 ## Build the Windows executable
 
-Create the project virtual environment once, then run the build script:
+Create the virtual environment once, then run the build script:
 
 ```powershell
 py -3 -m venv .venv
 ```
 
-Now double-click `build_exe.bat` from the project folder. It installs the build dependencies in `.venv` and creates:
+Double-click `build_exe.bat`. It installs the build dependencies and creates:
 
 ```text
 dist\Sin Spire Save Editor.exe
 ```
 
-The executable is for Windows. The first build requires an internet connection to install PyInstaller.
+The first build requires an internet connection to install PyInstaller and dependencies.
 
-## Development
+## Credits and links
 
-Open the project folder in VSCodium. The optional `.vscode/launch.json` configuration can launch the app with F5 when the Python extension is installed.
+- *Sin Spire*, its game content, name, logo, and artwork are by **Krasue Games** and their respective rights holders. Visit the [Sin Spire Steam page](https://store.steampowered.com/app/3221770/Sin_Spire/) or [Krasue Games on Patreon](https://www.patreon.com/c/KrasueGames47/home).
+- This save editor was created by **LoseMyXelf (LMX)**. It is an independent fan-made utility and is not an official game tool.
+- The bundled `pygvas` parser includes a separate license and attribution: **Robin Eric Fredericksen, CC BY-NC-SA 4.0**. See [`pygvas/LICENSE`](pygvas/LICENSE) for the full terms. This applies to the parser material, not automatically to the save editor's own code.
+- The app icon is original artwork created for this save editor; it is not an official *Sin Spire* asset.
 
-## Credits and project status
-
-- **Sin Spire** was created by Krasue Games.
-- **Save editor** created by LoseMyXelf (LMX).
-- The save editor is an independent community project and is not an official game tool.
-
-## License information
-
-The bundled parser in `pygvas/` includes its own license. See [`pygvas/LICENSE`](pygvas/LICENSE) for the full text and attribution. That license file belongs with the parser; it is not a license chosen for the save editor's own code. No separate license for the save editor's code has been selected yet.
-
-The game name, logo, and artwork are associated with Sin Spire and their respective rights holders; they are not licensed by the parser's license.
+No separate license has been selected for the save editor's own code. The game name, logo, and artwork are not licensed by this project or by the parser license; their inclusion here does not imply endorsement or ownership by the save editor author.
