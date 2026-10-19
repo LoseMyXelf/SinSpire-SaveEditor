@@ -2,6 +2,8 @@
 
 An unofficial Windows desktop utility for inspecting and editing supported **Sin Spire** Unreal Engine `.sav` files. It is written in Python and uses a bundled GVAS parser.
 
+Current version: **0.2.0**.
+
 > **Unofficial community project:** This tool is not made by, affiliated with, or endorsed by Krasue Games. Use it at your own risk. Keep a backup of your save before editing.
 
 ## Features
@@ -9,6 +11,7 @@ An unofficial Windows desktop utility for inspecting and editing supported **Sin
 - Open and inspect a `.sav` file.
 - Edit player values, skill levels, inventory and progress values, and supported weapon fields.
 - Repair all weapons by setting durability to 100 without changing loaded ammunition.
+- Create a timestamped, byte-for-byte backup of the original save.
 - Save an edited copy to a folder you choose. The source save is left untouched, and the copy keeps the original filename.
 - Browse help about save storage types and project information in the app.
 

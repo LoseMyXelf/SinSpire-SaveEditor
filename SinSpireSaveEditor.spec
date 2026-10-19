@@ -10,7 +10,7 @@ a = Analysis(
         ("sinspire_logo_header.png", "."),
     ],
     hiddenimports=[],
-    hookspath=[],
+    hookspath=["."],
     hooksconfig={},
     runtime_hooks=[],
     excludes=[],
