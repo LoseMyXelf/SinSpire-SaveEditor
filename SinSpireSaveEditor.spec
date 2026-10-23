@@ -7,6 +7,8 @@ a = Analysis(
     datas=[
         ("save_editor_app_icon.ico", "."),
         ("save_editor_app_icon.png", "."),
+        ("sinspire_icon.png", "."),
+        ("sinspire_icon.ico", "."),
     ],
     hiddenimports=[],
     hookspath=["."],
@@ -34,5 +36,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=["save_editor_app_icon.ico"],
+    icon=["sinspire_icon.ico"],
 )

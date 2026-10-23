@@ -50,9 +50,9 @@ The first build requires an internet connection to install PyInstaller and depen
 
 ## Credits and links
 
-- *Sin Spire*, its game content, name, logo, and artwork are by **Krasue Games** and their respective rights holders. Visit the [Sin Spire Steam page](https://store.steampowered.com/app/3221770/Sin_Spire/) or [Krasue Games on Patreon](https://www.patreon.com/c/KrasueGames47/home).
+- *Sin Spire*, its game content, name, logo, and artwork are by **Krasue Games** and their respective rights holders. The game name and Steam artwork included here are used with permission from the developer. Visit the [Sin Spire Steam page](https://store.steampowered.com/app/3221770/Sin_Spire/) or [Krasue Games on Patreon](https://www.patreon.com/c/KrasueGames47/home).
 - This save editor was created by **LoseMyXelf (LMX)**. It is an independent fan-made utility and is not an official game tool.
 - The bundled `pygvas` parser includes a separate license and attribution: **Robin Eric Fredericksen, CC BY-NC-SA 4.0**. See [`pygvas/LICENSE`](pygvas/LICENSE) for the full terms. This applies to the parser material, not automatically to the save editor's own code.
-- The app icon is original artwork created for this save editor; it is not an official *Sin Spire* asset.
+- The app icon, in-app header, website branding, and social preview use *Sin Spire* artwork with permission from the developer. The save editor is an independent fan-made tool.
 
-No separate license has been selected for the save editor's own code. The game name, logo, and artwork are not licensed by this project or by the parser license; their inclusion here does not imply endorsement or ownership by the save editor author.
+No separate license has been selected for the save editor's own code. Permission to use the game name and Steam artwork does not imply ownership of those assets or endorsement of this independent save editor.

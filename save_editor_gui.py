@@ -130,12 +130,12 @@ class SaveEditor(ctk.CTk, TkinterDnD.DnDWrapper):
         super().__init__()
         self.TkdndVersion = TkinterDnD._require(self)
         self.title("Sin Spire Save Editor")
-        icon_path = Path(__file__).resolve().with_name("save_editor_app_icon.ico")
+        icon_path = Path(__file__).resolve().with_name("sinspire_icon.ico")
         try:
             self.iconbitmap(default=str(icon_path))
             self.iconbitmap(str(icon_path))
         except tk.TclError:
-            png_icon = Path(__file__).resolve().with_name("save_editor_app_icon.png")
+            png_icon = Path(__file__).resolve().with_name("sinspire_icon.png")
             if png_icon.exists():
                 self._app_icon = tk.PhotoImage(file=str(png_icon))
                 self.iconphoto(True, self._app_icon)
@@ -210,7 +210,7 @@ class SaveEditor(ctk.CTk, TkinterDnD.DnDWrapper):
         root.grid_rowconfigure(2, weight=1)
         top = styled_frame(root)
         top.grid(row=0, column=0, sticky="ew", pady=(0, 16))
-        header_icon_path = Path(__file__).resolve().with_name("save_editor_app_icon.png")
+        header_icon_path = Path(__file__).resolve().with_name("sinspire_icon.png")
         if header_icon_path.exists():
             header_icon = Image.open(header_icon_path)
             self._header_icon = ctk.CTkImage(light_image=header_icon, dark_image=header_icon, size=(64, 64))
